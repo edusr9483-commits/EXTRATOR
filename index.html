@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Extrator de Prompts PRO V3</title>
+<style>
+body { background:#0f172a; color:#e2e8f0; font-family:Arial; padding:20px; }
+textarea { width:100%; height:300px; background:#020617; color:#22c55e; padding:15px; border:none; border-radius:10px; }
+button { padding:15px; margin-top:10px; background:#22c55e; border:none; border-radius:10px; cursor:pointer; font-weight:bold; }
+</style>
+</head>
+<body>
+<h1>Extrator de Prompts PRO V3 🔥</h1>
+<input type="file" id="imageInput" accept="image/*"><br>
+<button onclick="analisarImagem()">ANALISAR IMAGEM</button>
+<textarea id="output"></textarea>
+
+<script>
+
+function detectarTipo() {
+    return "DESIGN";
+}
+
+function detectarProfundidade() {
+    return {
+        plano: "3D FAKE",
+        camadas: ["background", "midground", "foreground"],
+        descricao: "Uso de sobreposição e escala simulando profundidade tridimensional"
+    };
+}
+
+function detectarInteracao() {
+    return {
+        tipos: ["overlap", "mask", "blend"],
+        descricao: "Elementos interagem com recorte e fusão visual entre camadas"
+    };
+}
+
+function analisarCamadas() {
+    return `
+[MAPEAMENTO DE CAMADAS]
+- BACKGROUND: Elementos gráficos difusos (bandeira, textura, blur, gradientes)
+- MIDGROUND: Tipografia principal integrada ao ambiente
+- FOREGROUND: Personagem com recorte ativo e interação direta
+`;
+}
+
+function analisarProfundidadeAvancada() {
+    return `
+[GEOMETRIA ESPACIAL]
+- Profundidade: 3D fake com hierarquia de camadas
+- Escala progressiva entre elementos
+- Separação por contraste e iluminação
+- Uso de haze/grain para distanciamento
+`;
+}
+
+function analisarInteracoes() {
+    return `
+[INTERAÇÃO ENTRE ELEMENTOS]
+- OVERLAP: personagem sobre tipografia
+- MASK: recorte preciso em letras
+- BLEND: fusão de textura dentro da tipografia
+`;
+}
+
+function gerarPrompt() {
+    return `
+PROMPT FINAL:
+
+poster promocional cinematográfico,
+composição vertical centralizada,
+tipografia gigante integrada ao ambiente,
+personagem em primeiro plano atravessando texto (efeito pop-out),
+profundidade simulada com múltiplas camadas (foreground, midground, background),
+interação real entre elementos com overlap e máscara,
+color grading cinematográfico com tons quentes e frios contrastantes,
+iluminação com rim light destacando o sujeito,
+texturas aplicadas dentro da tipografia,
+fundo com motion blur e ruído orgânico,
+alta nitidez e contraste profundo
+`;
+}
+
+function analisarImagem() {
+    let tipo = detectarTipo();
+    let profundidade = detectarProfundidade();
+    let interacao = detectarInteracao();
+
+    let resultado = `
+[1. TIPO]
+${tipo}
+
+[2. PROFUNDIDADE]
+Nível: ${profundidade.plano}
+Descrição: ${profundidade.descricao}
+
+[3. INTERAÇÃO]
+Tipos: ${interacao.tipos.join(', ')}
+${interacao.descricao}
+
+${analisarCamadas()}
+${analisarProfundidadeAvancada()}
+${analisarInteracoes()}
+
+${gerarPrompt()}
+`;
+
+    document.getElementById("output").value = resultado;
+}
+
+</script>
+</body>
+</html>
